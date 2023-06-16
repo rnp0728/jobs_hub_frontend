@@ -1,6 +1,6 @@
-# job_finder_app
+# Jobs Hub
 
-A new Flutter project.
+A Complete Flutter project.
 
 ## Getting Started
 
