@@ -16,6 +16,7 @@ class InternshipsResponse {
     required this.period,
     required this.contract,
     required this.requirements,
+    required this.skillsRequired,
     required this.imageUrl,
     required this.agentId,
     required this.createdAt,
@@ -32,6 +33,7 @@ class InternshipsResponse {
   final String period;
   final String contract;
   final List<String> requirements;
+  final List<String> skillsRequired;
   final String imageUrl;
   final String agentId;
   final DateTime createdAt;
@@ -49,6 +51,7 @@ class InternshipsResponse {
         period: json["period"],
         contract: json["contract"],
         requirements: List<String>.from(json["requirements"].map((x) => x)),
+        skillsRequired: List<String>.from(json["skillsRequired"].map((x) => x)),
         imageUrl: json["imageUrl"],
         agentId: json["agentId"],
         createdAt: DateTime.parse(json["createdAt"]),

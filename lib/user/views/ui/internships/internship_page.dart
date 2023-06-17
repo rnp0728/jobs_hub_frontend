@@ -21,6 +21,8 @@ class InternshipPage extends StatefulWidget {
 }
 
 class _InternshipPageState extends State<InternshipPage> {
+  String bullet = "\u2022";
+
   @override
   Widget build(BuildContext context) {
     return Consumer<InternshipsNotifier>(
@@ -180,7 +182,6 @@ class _InternshipPageState extends State<InternshipPage> {
                               itemCount: internship.requirements.length,
                               itemBuilder: (context, index) {
                                 final req = internship.requirements[index];
-                                String bullet = "\u2022";
                                 return Text(
                                   "$bullet $req\n",
                                   maxLines: 4,
@@ -189,6 +190,31 @@ class _InternshipPageState extends State<InternshipPage> {
                                       FontWeight.normal),
                                 );
                               },
+                            ),
+                          ),
+                          const HeightSpacer(size: 20),
+                          ReusableText(
+                            text: "Key Skills Required",
+                            style: appstyle(
+                                16, Color(kDark.value), FontWeight.w500),
+                          ),
+                          const HeightSpacer(size: 10),
+                          SizedBox(
+                            height: height * 0.3,
+                            child: Wrap(
+                              runSpacing: 5,
+                              spacing: 10,
+                              children: [
+                                for (int i = 0;
+                                    i < internship.skillsRequired.length;
+                                    i++)
+                                  Chip(
+                                    side: BorderSide(
+                                        color: Color(kOrange.value), width: 1),
+                                    label: Text(
+                                        "$bullet ${internship.skillsRequired[i]}"),
+                                  )
+                              ],
                             ),
                           ),
                           const HeightSpacer(size: 20),

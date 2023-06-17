@@ -62,12 +62,20 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  List<String> appBarTitle = [
+    'Home',
+    'Jobs',
+    'Internships',
+    'Trending Courses',
+    'More Options'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.h),
         child: CustomAppBar(
+          text: appBarTitle[_currentIndex],
           actions: [
             Padding(
               padding: EdgeInsets.all(12.h),
