@@ -95,7 +95,13 @@ class LoginNotifier extends ChangeNotifier {
   userLogin(LoginModel model) {
     AuthHelper.login(model).then((response) {
       if (response && firstTime) {
-        Get.off(() => const PersonalDetails());
+        if (userType == "admin") {
+          Get.off(() => const AdminHomePage());
+        } else if (userType == "recruiter") {
+          Get.off(() => const RecruiterHomeScreen());
+        } else {
+          Get.off(() => const PersonalDetails());
+        }
       } else if (response && !firstTime) {
         if (userType == "admin") {
           Get.off(() => const AdminHomePage());

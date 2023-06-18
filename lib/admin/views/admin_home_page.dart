@@ -1,5 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:jobs_hub/admin/controllers/users_provider.dart';
 import 'package:jobs_hub/admin/views/courses/add_courses_page.dart';
 import 'package:jobs_hub/admin/views/internships/add_internships_page.dart';
 import 'package:jobs_hub/admin/views/internships/internships_details_page.dart';
+import 'package:jobs_hub/admin/views/internships/internships_search_page.dart';
 import 'package:jobs_hub/admin/views/jobs/add_jobs_page.dart';
 import 'package:jobs_hub/admin/views/jobs/jobs_details_page.dart';
 import 'package:jobs_hub/admin/views/users_search_page.dart';
@@ -24,12 +26,15 @@ import 'package:jobs_hub/user/views/ui/auth/login.dart';
 import 'package:jobs_hub/user/views/ui/auth/profile.dart';
 import 'package:jobs_hub/user/views/ui/common/about_page.dart';
 import 'package:jobs_hub/user/views/ui/common/update_password_page.dart';
+import 'package:jobs_hub/user/views/ui/courses/course_search_widget.dart';
 import 'package:jobs_hub/user/views/ui/internships/widgets/custom_internship_tile.dart';
 import 'package:jobs_hub/user/views/ui/internships/widgets/internship_search_widget.dart';
 import 'package:jobs_hub/user/views/ui/jobs/widgets/custom_tile.dart';
 import 'package:jobs_hub/user/views/ui/jobs/widgets/horizontal_shimmer.dart';
 import 'package:jobs_hub/user/views/ui/jobs/widgets/job_search_widget.dart';
+import 'package:jobs_hub/user/views/ui/search/searchpage.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -192,7 +197,7 @@ class PostedCoursesWidget extends StatelessWidget {
               const HeightSpacer(size: 10),
               Padding(
                 padding: EdgeInsets.only(left: 10.w),
-                child: InternshipSearchWidget(
+                child: CourseSearchWidget(
                   onTap: () {
                     Get.to(() => const UsersSearchPage());
                   },
@@ -264,7 +269,7 @@ class PostedInternshipsWidget extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10.w),
                 child: InternshipSearchWidget(
                   onTap: () {
-                    Get.to(() => const UsersSearchPage());
+                    Get.to(() => const InternshipsSearchPage());
                   },
                 ),
               ),
@@ -337,7 +342,7 @@ class PostedJobsWidget extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10.w),
                 child: JobsSearchWidget(
                   onTap: () {
-                    Get.to(() => const UsersSearchPage());
+                    Get.to(() => const SearchPage());
                   },
                 ),
               ),
@@ -391,9 +396,14 @@ class PostedJobsWidget extends StatelessWidget {
   }
 }
 
-class UsersListWidget extends StatelessWidget {
+class UsersListWidget extends StatefulWidget {
   const UsersListWidget({super.key});
 
+  @override
+  State<UsersListWidget> createState() => _UsersListWidgetState();
+}
+
+class _UsersListWidgetState extends State<UsersListWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<UsersNotifier>(builder: (context, userNotifier, child) {
@@ -445,6 +455,43 @@ class UsersListWidget extends StatelessWidget {
                             onTap: () {
                               // TODO
                             },
+                            onLongPress: () {
+                              QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.warning,
+                                text:
+                                    'Do you want remove ${user.username} from Jobs Hub?',
+                                confirmBtnText: 'Yes',
+                                cancelBtnText: 'No',
+                                onConfirmBtnTap: () async {
+                                  var response = await userNotifier
+                                      .deleteUserByAdmin(userId: user.id);
+                                  Get.back();
+                                  if (response) {
+                                    Get.snackbar(
+                                      'Account Deleted',
+                                      'Account Deleted Successfully',
+                                      colorText: Color(kLight.value),
+                                      backgroundColor: Color(kDarkBlue.value),
+                                      icon: const Icon(Icons.done),
+                                    );
+                                  } else {
+                                    Get.snackbar(
+                                      'Error Occurred',
+                                      'Please Try Again Later!',
+                                      colorText: Color(kLight.value),
+                                      backgroundColor: Color(kDarkBlue.value),
+                                      icon: const Icon(Icons.done),
+                                    );
+                                  }
+
+                                  setState(() {});
+                                },
+                                showCancelBtn: true,
+                                onCancelBtnTap: () => Get.back(),
+                                confirmBtnColor: Colors.green,
+                              );
+                            },
                             user: user,
                           ),
                         );
@@ -469,59 +516,64 @@ class MoreOptionsWidget extends StatelessWidget {
     var loginNotifier = Provider.of<LoginNotifier>(context);
     return Builder(builder: (context) {
       return SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const HeightSpacer(size: 15),
-                ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.info),
-                      title: const Text('About JobsHub'),
-                      onTap: () {
-                        Get.to(() => const AboutUsPage());
-                      },
-                    ),
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.edit_note_outlined),
-                      title: const Text('Update Password'),
-                      onTap: () {
-                        Get.to(() => const UpdatePasswordPage());
-                      },
-                    ),
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.logout_outlined),
-                      title: const Text('Logout'),
-                      onTap: () {
-                        loginNotifier.logOut();
-                        Get.snackbar(
-                          'Log Out',
-                          'Logged out Successfully!, Hope to see you again soon.',
-                          colorText: Color(kLight.value),
-                          backgroundColor: Color(kLightBlue.value),
-                          icon: const Icon(Icons.add_alert),
-                        );
-                        Get.off(() => const LoginPage());
-                      },
-                    )
-                  ],
-                ),
-              ],
-            ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  'assets/images/what-happend.png',
+                  fit: BoxFit.contain,
+                ).animate().fade(duration: const Duration(seconds: 2)),
+              ),
+              const HeightSpacer(size: 15),
+              ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.info),
+                    title: const Text('About JobsHub'),
+                    onTap: () {
+                      Get.to(() => const AboutUsPage());
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.edit_note_outlined),
+                    title: const Text('Update Password'),
+                    onTap: () {
+                      Get.to(() => const UpdatePasswordPage());
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.logout_outlined),
+                    title: const Text('Logout'),
+                    onTap: () {
+                      loginNotifier.logOut();
+                      Get.snackbar(
+                        'Log Out',
+                        'Logged out Successfully!, Hope to see you again soon.',
+                        colorText: Color(kLight.value),
+                        backgroundColor: Color(kLightBlue.value),
+                        icon: const Icon(Icons.add_alert),
+                      );
+                      Get.off(() => const LoginPage());
+                    },
+                  )
+                ],
+              ),
+            ],
           ),
         ),
       );

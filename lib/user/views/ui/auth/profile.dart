@@ -22,6 +22,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String bullet = "\u2022";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -230,35 +231,55 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const HeightSpacer(size: 3),
-                          SizedBox(
-                            height: height * 0.5,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8.w, vertical: 8.h),
-                              child: ListView.builder(
-                                itemCount: userData.skills?.length ?? 0,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  final skill = userData.skills?[index];
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.w),
-                                      width: width,
-                                      height: height * 0.06,
-                                      color: Color(kLight.value),
-                                      child: ReusableText(
-                                        text: skill ?? '',
-                                        style: appstyle(16, Color(kDark.value),
-                                            FontWeight.normal),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
+                          const HeightSpacer(size: 10),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: Wrap(
+                              runSpacing: 5,
+                              spacing: 15,
+                              children: [
+                                for (int i = 0;
+                                    i < (userData.skills?.length ?? 0);
+                                    i++)
+                                  Chip(
+                                    side: BorderSide(
+                                        color: Color(kOrange.value), width: 1),
+                                    label:
+                                        Text("$bullet ${userData.skills![i]}"),
+                                  )
+                              ],
                             ),
-                          )
+                          ),
+                          const HeightSpacer(size: 20),
+                          // SizedBox(
+                          //   height: height * 0.5,
+                          //   child: Padding(
+                          //     padding: EdgeInsets.symmetric(
+                          //         horizontal: 8.w, vertical: 8.h),
+                          //     child: ListView.builder(
+                          //       itemCount: userData.skills?.length ?? 0,
+                          //       physics: const NeverScrollableScrollPhysics(),
+                          //       itemBuilder: (context, index) {
+                          //         final skill = userData.skills?[index];
+                          //         return Padding(
+                          //           padding: const EdgeInsets.all(8.0),
+                          //           child: Container(
+                          //             padding: EdgeInsets.symmetric(
+                          //                 horizontal: 10.w),
+                          //             width: width,
+                          //             height: height * 0.06,
+                          //             color: Color(kLight.value),
+                          //             child: ReusableText(
+                          //               text: skill ?? '',
+                          //               style: appstyle(16, Color(kDark.value),
+                          //                   FontWeight.normal),
+                          //             ),
+                          //           ),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                     )

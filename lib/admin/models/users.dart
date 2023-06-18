@@ -44,7 +44,7 @@ class User {
         isAgent: json["isAgent"],
         userType: json["userType"],
         skills: List<String>.from(json["skills"].map((x) => x)),
-        phone: json["phone"],
+        phone: json["phone"] ?? '9348758771',
         profile: json["profile"],
       );
 

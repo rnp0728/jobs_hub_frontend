@@ -47,22 +47,46 @@ class UsersHelper {
     }
   }
 
-  // static Future<List<JobsResponse>> searchUsers(String searchQuery) async {
-  //   Map<String, String> requestHeaders = {
-  //     'Content-Type': 'application/json',
-  //   };
+  static Future<bool> deleteUserByAdmin({required String userId}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': 'Bearer $token'
+    };
 
-  //   var url = Uri.https(Config.apiUrl, '${Config.search}/$searchQuery');
-  //   var response = await client.get(
-  //     url,
-  //     headers: requestHeaders,
-  //   );
+    var url = Uri.https(Config.apiUrl, '${Config.users}/remove-user/$userId');
+    var response = await client.delete(
+      url,
+      headers: requestHeaders,
+    );
 
-  //   if (response.statusCode == 200) {
-  //     var jobsList = jobsResponseFromJson(response.body);
-  //     return jobsList;
-  //   } else {
-  //     throw Exception('Failed to load the Jobs');
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Failed to load the User Details');
+    }
+  }
+
+  static Future<List<User>> searchUsers(String searchQuery) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': 'Bearer $token'
+    };
+
+    var url = Uri.https(Config.apiUrl, '${Config.usersSearch}/$searchQuery');
+    var response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      var usersList = usersFromJson(response.body);
+      return usersList;
+    } else {
+      throw Exception('Failed to load the Users');
+    }
+  }
 }

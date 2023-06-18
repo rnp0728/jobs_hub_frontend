@@ -13,6 +13,7 @@ class Config {
   static const String bookmarkUrl = "/api/bookmarks";
   static const String internshipBookmarkUrl = "/api/bookmarks/internships";
   static const String users = "/api/users";
+  static const String usersSearch = "/api/users/search";
   static const String updatePasswordUrl = "/api/users/update-password";
   static const String allUsers = "/api/users/all-users";
   static const String applicants = "/api/applicants";

@@ -1,5 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
@@ -179,89 +180,94 @@ class _MoreOptionsWidgetState extends State<MoreOptionsWidget> {
     var loginNotifier = Provider.of<LoginNotifier>(context);
     return Builder(builder: (context) {
       return SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const HeightSpacer(size: 15),
-                ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.security_outlined),
-                      title: const Text('Safety Tips'),
-                      onTap: () {
-                        Get.to(() => const SafetyTipsPage());
-                      },
-                    ),
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.note_alt_outlined),
-                      title: const Text('Terms and Conditions'),
-                      onTap: () {
-                        Get.to(() => const TermsAndConditionsPage());
-                      },
-                    ),
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.lock_outline_rounded),
-                      title: const Text('Privacy Policy'),
-                      onTap: () {
-                        Get.to(() => const PrivacyPolicyPage());
-                      },
-                    ),
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.info),
-                      title: const Text('About JobsHub'),
-                      onTap: () {
-                        Get.to(() => const AboutUsPage());
-                      },
-                    ),
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.edit_note_outlined),
-                      title: const Text('Update Password'),
-                      onTap: () {
-                        Get.to(() => const UpdatePasswordPage());
-                      },
-                    ),
-                    ListTile(
-                      iconColor: Color(kDark.value),
-                      titleTextStyle:
-                          appstyle(15, Color(kDark.value), FontWeight.w500),
-                      leading: const Icon(Icons.logout_outlined),
-                      title: const Text('Logout'),
-                      onTap: () {
-                        loginNotifier.logOut();
-                        Get.snackbar(
-                          'Log Out',
-                          'Logged out Successfully!, Hope to see you again soon.',
-                          colorText: Color(kLight.value),
-                          backgroundColor: Color(kLightBlue.value),
-                          icon: const Icon(Icons.add_alert),
-                        );
-                        Get.off(() => const LoginPage());
-                      },
-                    )
-                  ],
-                ),
-              ],
-            ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  'assets/images/what-happend.png',
+                  fit: BoxFit.contain,
+                ).animate().fade(duration: const Duration(seconds: 1)),
+              ),
+              const HeightSpacer(size: 15),
+              ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.security_outlined),
+                    title: const Text('Safety Tips'),
+                    onTap: () {
+                      Get.to(() => const SafetyTipsPage());
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.note_alt_outlined),
+                    title: const Text('Terms and Conditions'),
+                    onTap: () {
+                      Get.to(() => const TermsAndConditionsPage());
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.lock_outline_rounded),
+                    title: const Text('Privacy Policy'),
+                    onTap: () {
+                      Get.to(() => const PrivacyPolicyPage());
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.info),
+                    title: const Text('About JobsHub'),
+                    onTap: () {
+                      Get.to(() => const AboutUsPage());
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.edit_note_outlined),
+                    title: const Text('Update Password'),
+                    onTap: () {
+                      Get.to(() => const UpdatePasswordPage());
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.logout_outlined),
+                    title: const Text('Logout'),
+                    onTap: () {
+                      loginNotifier.logOut();
+                      Get.snackbar(
+                        'Log Out',
+                        'Logged out Successfully!, Hope to see you again soon.',
+                        colorText: Color(kLight.value),
+                        backgroundColor: Color(kLightBlue.value),
+                        icon: const Icon(Icons.add_alert),
+                      );
+                      Get.off(() => const LoginPage());
+                    },
+                  )
+                ],
+              ),
+            ],
           ),
         ),
       );

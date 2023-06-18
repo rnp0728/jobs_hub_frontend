@@ -9,6 +9,7 @@ import 'package:jobs_hub/user/views/common/custom_btn.dart';
 import 'package:jobs_hub/user/views/common/custom_textfield.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:jobs_hub/user/views/common/height_spacer.dart';
+import 'package:jobs_hub/widgets/editable_string_list.dart';
 import 'package:provider/provider.dart';
 
 class PersonalDetails extends StatefulWidget {
@@ -26,6 +27,8 @@ class _PersonalDetailsState extends State<PersonalDetails> {
   TextEditingController skill2Controller = TextEditingController();
   TextEditingController skill3Controller = TextEditingController();
   TextEditingController skill4Controller = TextEditingController();
+
+  List<String> skills = [];
 
   @override
   void dispose() {
@@ -116,49 +119,24 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                       text: 'Professional Details',
                       style: appstyle(35, Color(kDark.value), FontWeight.bold),
                     ),
-                    CustomTextField(
-                      controller: skill0Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
-                    ),
                     const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill1Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
+                    EditableStringList(
+                      label: 'Skills',
+                      stringList: skills,
+                      updateListInState: (list) {
+                        for (var element in list) {
+                          if (!skills.contains(element)) {
+                            requirements.add(element);
+                          }
+                        }
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please add some skills';
+                        }
                         return null;
                       },
-                    ),
-                    const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill2Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
-                    ),
-                    const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill3Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
-                    ),
-                    const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill4Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
+                      saveValidator: (value) => null,
                     ),
                     const HeightSpacer(size: 20),
                     Consumer<ImageUploader>(
@@ -187,13 +165,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                                   location: locationController.text,
                                   phone: phoneController.text,
                                   profile: imageUploader.imageUrl.toString(),
-                                  skills: [
-                                    skill0Controller.text,
-                                    skill1Controller.text,
-                                    skill2Controller.text,
-                                    skill3Controller.text,
-                                    skill4Controller.text,
-                                  ]);
+                                  skills: skills);
 
                               loginNotifier.updateProfile(model);
                             }

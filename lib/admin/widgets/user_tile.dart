@@ -6,13 +6,16 @@ import 'package:jobs_hub/user/views/common/width_spacer.dart';
 
 class UserTile extends StatelessWidget {
   final void Function()? onTap;
+  final void Function()? onLongPress;
   final User user;
-  const UserTile({super.key, this.onTap, required this.user});
+  const UserTile(
+      {super.key, this.onTap, required this.user, required this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+      onLongPress: onLongPress,
       child: Container(
         decoration: BoxDecoration(
             color: Color(kLightGrey.value),

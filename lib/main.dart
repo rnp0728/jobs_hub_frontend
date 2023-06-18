@@ -100,7 +100,6 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.grey,
             ),
             home:
-                // const AdminHomePage(),
                 defaultHome, // Home page based on the users actions (if he has already visited the onboarding screen or logged in)
           );
         });

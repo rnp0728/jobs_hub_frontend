@@ -14,4 +14,8 @@ class UsersNotifier extends ChangeNotifier {
   getUserDetails(String userId) {
     user = UsersHelper.getUserDetails(userId: userId);
   }
+
+  Future<bool> deleteUserByAdmin({required String userId}) {
+    return UsersHelper.deleteUserByAdmin(userId: userId);
+  }
 }

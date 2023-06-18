@@ -6,12 +6,11 @@ import 'package:get/get.dart';
 import 'package:jobs_hub/user/controllers/exports.dart';
 import 'package:jobs_hub/user/models/request/auth/profile_update_model.dart';
 import 'package:jobs_hub/user/views/common/app_bar.dart';
-import 'package:jobs_hub/user/views/common/app_style.dart';
 import 'package:jobs_hub/user/views/common/custom_btn.dart';
 import 'package:jobs_hub/user/views/common/custom_textfield.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:jobs_hub/user/views/common/height_spacer.dart';
-import 'package:jobs_hub/user/views/common/reusable_text.dart';
+import 'package:jobs_hub/widgets/editable_string_list.dart';
 import 'package:provider/provider.dart';
 
 class UpdateProfile extends StatefulWidget {
@@ -36,6 +35,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
       TextEditingController(text: profile[3]);
   TextEditingController skill4Controller =
       TextEditingController(text: profile[4]);
+
+  List<String> skills = [];
+
+  @override
+  void initState() {
+    skills = profile;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -135,49 +142,24 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       text: 'Professional Details',
                       style: appstyle(35, Color(kDark.value), FontWeight.bold),
                     ),
-                    CustomTextField(
-                      controller: skill0Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
-                    ),
                     const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill1Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
+                    EditableStringList(
+                      label: 'Skills',
+                      stringList: skills,
+                      updateListInState: (list) {
+                        for (var element in list) {
+                          if (!skills.contains(element)) {
+                            requirements.add(element);
+                          }
+                        }
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please add some skills';
+                        }
                         return null;
                       },
-                    ),
-                    const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill2Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
-                    ),
-                    const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill3Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
-                    ),
-                    const HeightSpacer(size: 10),
-                    CustomTextField(
-                      controller: skill4Controller,
-                      hintText: 'Professional Skills',
-                      keyboardType: TextInputType.text,
-                      validator: (skill) {
-                        return null;
-                      },
+                      saveValidator: (value) => null,
                     ),
                     const HeightSpacer(size: 20),
                     Consumer<ImageUploader>(
@@ -198,13 +180,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   location: locationController.text,
                                   phone: phoneController.text,
                                   profile: imageUploader.imageUrl.toString(),
-                                  skills: [
-                                    skill0Controller.text,
-                                    skill1Controller.text,
-                                    skill2Controller.text,
-                                    skill3Controller.text,
-                                    skill4Controller.text,
-                                  ]);
+                                  skills: skills);
 
                               loginNotifier.updateProfile(model);
                             }

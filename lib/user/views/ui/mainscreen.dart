@@ -50,12 +50,10 @@ class _MainScreenState extends State<MainScreen> {
       case 2:
         return const InternshipsListPage();
       case 3:
-        return const ChatsPage();
-      case 4:
         return const BookMarkPage();
-      case 5:
+      case 4:
         return const DeviceManagement();
-      case 6:
+      case 5:
         return const ProfilePage();
       default:
         return const Placeholder();

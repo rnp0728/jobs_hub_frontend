@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:jobs_hub/user/controllers/exports.dart';
-import 'package:jobs_hub/user/views/common/app_style.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
-import 'package:jobs_hub/user/views/common/reusable_text.dart';
 import 'package:jobs_hub/user/views/common/width_spacer.dart';
 import 'package:provider/provider.dart';
 
@@ -55,18 +53,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       ? Color(kLight.value)
                       : Color(kLightGrey.value),
                 ),
-                drawerItem(
-                  Ionicons.chatbubble_outline,
-                  "Chat",
-                  3,
-                  zoomNotifier.currentIndex == 3
-                      ? Color(kLight.value)
-                      : Color(kLightGrey.value),
-                ),
+                // drawerItem(
+                //   Ionicons.chatbubble_outline,
+                //   "Chat",
+                //   3,
+                //   zoomNotifier.currentIndex == 3
+                //       ? Color(kLight.value)
+                //       : Color(kLightGrey.value),
+                // ),
                 drawerItem(
                   Fontisto.bookmark,
                   "Bookmarks",
-                  4,
+                  3,
                   zoomNotifier.currentIndex == 4
                       ? Color(kLight.value)
                       : Color(kLightGrey.value),
@@ -74,7 +72,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 drawerItem(
                   MaterialCommunityIcons.devices,
                   "Device Mgmt",
-                  5,
+                  4,
                   zoomNotifier.currentIndex == 5
                       ? Color(kLight.value)
                       : Color(kLightGrey.value),
@@ -82,7 +80,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 drawerItem(
                   FontAwesome5Regular.user_circle,
                   "Profile",
-                  6,
+                  5,
                   zoomNotifier.currentIndex == 6
                       ? Color(kLight.value)
                       : Color(kLightGrey.value),

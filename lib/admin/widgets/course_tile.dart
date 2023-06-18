@@ -18,7 +18,7 @@ class CourseTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: height * 0.15,
+        height: height * 0.16,
         width: width,
         child: Padding(
           padding: const EdgeInsets.only(left: 5),
@@ -28,10 +28,8 @@ class CourseTile extends StatelessWidget {
               Container(
                 height: height.h,
                 width: width * 0.34,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 2,
-                        color: const Color.fromARGB(255, 204, 194, 7))),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Image.network(course.imageUrl,
                     filterQuality: FilterQuality.high, fit: BoxFit.fill),
               ),
