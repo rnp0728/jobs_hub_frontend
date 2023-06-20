@@ -201,6 +201,17 @@ class _MoreOptionsWidgetState extends State<MoreOptionsWidget> {
                     iconColor: Color(kDark.value),
                     titleTextStyle:
                         appstyle(15, Color(kDark.value), FontWeight.w500),
+                    leading: const Icon(Icons.email_outlined),
+                    title: const Text('Check Emails'),
+                    onTap: () {
+                      Uri uri = Uri.parse('https://gmail.com');
+                      LaunchURL.launchURL(uri);
+                    },
+                  ),
+                  ListTile(
+                    iconColor: Color(kDark.value),
+                    titleTextStyle:
+                        appstyle(15, Color(kDark.value), FontWeight.w500),
                     leading: const Icon(Icons.security_outlined),
                     title: const Text('Safety Tips'),
                     onTap: () {
