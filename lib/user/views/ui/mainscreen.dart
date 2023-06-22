@@ -5,7 +5,6 @@ import 'package:jobs_hub/user/controllers/exports.dart';
 import 'package:jobs_hub/user/views/common/drawer/drawer_screen.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:jobs_hub/user/views/ui/auth/profile.dart';
-import 'package:jobs_hub/user/views/ui/bookmarks/bookmarks.dart';
 import 'package:jobs_hub/user/views/ui/bookmarks/bookmarks_with_navigation_bar.dart';
 import 'package:jobs_hub/user/views/ui/common/recommanded_sites_to_visit_page.dart';
 import 'package:jobs_hub/user/views/ui/device_mgt/devices_info.dart';
