@@ -32,8 +32,8 @@ class InternshipHorizontalTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/Facebook.png'),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(internship.imageUrl),
                   ),
                   const WidthSpacer(width: 10),
                   Flexible(

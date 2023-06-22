@@ -33,30 +33,6 @@ class _InternshipDetailsPageState extends State<InternshipDetailsPage> {
             preferredSize: Size.fromHeight(50.h),
             child: CustomAppBar(
               text: widget.title,
-              actions: [
-                Consumer<BookMarkNotifier>(
-                    builder: (context, bookMarkNotifier, child) {
-                  bookMarkNotifier.loadJobs();
-                  return GestureDetector(
-                    onTap: () {
-                      if (bookMarkNotifier.jobs.contains(widget.id)) {
-                        bookMarkNotifier.deleteInternshipBookmark(widget.id);
-                      } else {
-                        BookmarkReqModel model =
-                            BookmarkReqModel(job: widget.id);
-                        bookMarkNotifier.addInternshipBookmark(
-                            model, widget.id);
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 12.0),
-                      child: bookMarkNotifier.jobs.contains(widget.id)
-                          ? const Icon(Icons.bookmark_added_rounded)
-                          : const Icon(Icons.bookmark_add_outlined),
-                    ),
-                  );
-                })
-              ],
               child: GestureDetector(
                 onTap: () => Get.back(),
                 child: const Icon(Icons.arrow_back_ios),
@@ -96,9 +72,9 @@ class _InternshipDetailsPageState extends State<InternshipDetailsPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const CircleAvatar(
+                                CircleAvatar(
                                   backgroundImage:
-                                      AssetImage("assets/images/user.png"),
+                                      NetworkImage(internship.imageUrl),
                                 ),
                                 const HeightSpacer(size: 10),
                                 ReusableText(

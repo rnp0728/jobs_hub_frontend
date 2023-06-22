@@ -22,11 +22,6 @@ class PersonalDetails extends StatefulWidget {
 class _PersonalDetailsState extends State<PersonalDetails> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController locationController = TextEditingController();
-  TextEditingController skill0Controller = TextEditingController();
-  TextEditingController skill1Controller = TextEditingController();
-  TextEditingController skill2Controller = TextEditingController();
-  TextEditingController skill3Controller = TextEditingController();
-  TextEditingController skill4Controller = TextEditingController();
 
   List<String> skills = [];
 
@@ -34,11 +29,6 @@ class _PersonalDetailsState extends State<PersonalDetails> {
   void dispose() {
     phoneController.dispose();
     locationController.dispose();
-    skill0Controller.dispose();
-    skill1Controller.dispose();
-    skill2Controller.dispose();
-    skill3Controller.dispose();
-    skill4Controller.dispose();
     super.dispose();
   }
 

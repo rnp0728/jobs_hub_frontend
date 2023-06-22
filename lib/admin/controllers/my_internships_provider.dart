@@ -67,6 +67,37 @@ class MyInternshipNotifier extends ChangeNotifier {
     });
   }
 
+  updateInternship({required InternshipReqModel model}) {
+    PostedInternshipsHelper.updateAnInternship(model).then((response) {
+      if (response) {
+        Get.snackbar(
+          'Internship Posted',
+          'New Course Added to the List',
+          colorText: Color(kLight.value),
+          backgroundColor: Color(kDarkBlue.value),
+          icon: const Icon(Icons.done),
+        );
+        Future.delayed(const Duration(seconds: 2)).then((value) async {
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          String userType = prefs.getString('userType') ?? '';
+          if (userType == "admin") {
+            Get.off(() => const AdminHomePage());
+          } else if (userType == "recruiter") {
+            Get.off(() => const RecruiterHomeScreen());
+          }
+        });
+      } else {
+        Get.snackbar(
+          'Failed to Add',
+          'Unable to Add a New Internship',
+          colorText: Color(kLight.value),
+          backgroundColor: Color(kOrange.value),
+          icon: const Icon(Icons.cancel),
+        );
+      }
+    });
+  }
+
   var uuid = Uuid();
   final ImagePicker _picker = ImagePicker();
 

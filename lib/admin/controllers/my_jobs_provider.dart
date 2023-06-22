@@ -58,6 +58,37 @@ class MyJobsNotifier extends ChangeNotifier {
     });
   }
 
+  updateJob({required JobsReqModel model}) {
+    PostedJobsHelper.updateAJob(model).then((response) {
+      if (response) {
+        Get.snackbar(
+          'Job Posted',
+          'New Job Added to the List',
+          colorText: Color(kLight.value),
+          backgroundColor: Color(kDarkBlue.value),
+          icon: const Icon(Icons.done),
+        );
+        Future.delayed(const Duration(seconds: 2)).then((value) async {
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          String userType = prefs.getString('userType') ?? '';
+          if (userType == "admin") {
+            Get.off(() => const AdminHomePage());
+          } else if (userType == "recruiter") {
+            Get.off(() => const RecruiterHomeScreen());
+          }
+        });
+      } else {
+        Get.snackbar(
+          'Failed',
+          'Unable to Add a New Job',
+          colorText: Color(kLight.value),
+          backgroundColor: Color(kOrange.value),
+          icon: const Icon(Icons.cancel),
+        );
+      }
+    });
+  }
+
   var uuid = Uuid();
   final ImagePicker _picker = ImagePicker();
 

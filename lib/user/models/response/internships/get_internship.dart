@@ -16,6 +16,7 @@ class GetInternshipRes {
     required this.hiring,
     required this.description,
     required this.stipend,
+    required this.duration,
     required this.period,
     required this.contract,
     required this.requirements,
@@ -32,6 +33,7 @@ class GetInternshipRes {
   final bool hiring;
   final String description;
   final String stipend;
+  final String duration;
   final String period;
   final String contract;
   final List<String> requirements;
@@ -47,6 +49,7 @@ class GetInternshipRes {
           company: json["company"],
           email: json["email"],
           hiring: json["hiring"],
+          duration: json["duration"],
           description: json["description"],
           stipend: json["stipend"],
           period: json["period"],
@@ -64,6 +67,7 @@ class GetInternshipRes {
         "company": company,
         "email": email,
         "hiring": hiring,
+        "duration": duration,
         "description": description,
         "stipend": stipend,
         "period": period,

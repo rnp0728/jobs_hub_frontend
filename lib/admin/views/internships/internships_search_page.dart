@@ -32,7 +32,7 @@ class _InternshipsSearchPageState extends State<InternshipsSearchPage> {
             child: const Icon(Icons.arrow_back_ios),
           ),
           title: CustomField(
-            hintText: "Search for a user",
+            hintText: "Search for internship",
             controller: searchController,
             onEditingComplete: () {
               setState(() {});

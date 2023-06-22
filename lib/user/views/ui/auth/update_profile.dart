@@ -25,16 +25,6 @@ class UpdateProfile extends StatefulWidget {
 class _UpdateProfileState extends State<UpdateProfile> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController locationController = TextEditingController();
-  TextEditingController skill0Controller =
-      TextEditingController(text: profile[0]);
-  TextEditingController skill1Controller =
-      TextEditingController(text: profile[1]);
-  TextEditingController skill2Controller =
-      TextEditingController(text: profile[2]);
-  TextEditingController skill3Controller =
-      TextEditingController(text: profile[3]);
-  TextEditingController skill4Controller =
-      TextEditingController(text: profile[4]);
 
   List<String> skills = [];
 
@@ -48,11 +38,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
   void dispose() {
     phoneController.dispose();
     locationController.dispose();
-    skill0Controller.dispose();
-    skill1Controller.dispose();
-    skill2Controller.dispose();
-    skill3Controller.dispose();
-    skill4Controller.dispose();
     super.dispose();
   }
 

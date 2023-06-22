@@ -34,8 +34,7 @@ class VerticalTile extends StatelessWidget {
                     CircleAvatar(
                       backgroundColor: Color(kLightGrey.value),
                       radius: 30,
-                      backgroundImage:
-                          const AssetImage("assets/images/slack.png"),
+                      backgroundImage: NetworkImage(job.imageUrl),
                     ),
                     const WidthSpacer(width: 10),
                     Column(

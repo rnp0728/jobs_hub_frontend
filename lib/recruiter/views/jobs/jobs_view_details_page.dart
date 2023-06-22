@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:jobs_hub/admin/views/jobs/update_job_page.dart';
 import 'package:jobs_hub/user/controllers/exports.dart';
 import 'package:jobs_hub/user/views/common/app_bar.dart';
 import 'package:jobs_hub/user/views/common/custom_outline_btn.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:jobs_hub/user/views/common/height_spacer.dart';
-import 'package:jobs_hub/user/views/ui/apply_now/job_apply_now_form_page.dart';
 import 'package:provider/provider.dart';
 
 class JobsDetailsViewPage extends StatefulWidget {
@@ -29,19 +29,6 @@ class _JobsDetailsViewPageState extends State<JobsDetailsViewPage> {
             preferredSize: Size.fromHeight(50.h),
             child: CustomAppBar(
               text: widget.title,
-              actions: [
-                Consumer<BookMarkNotifier>(
-                    builder: (context, bookMarkNotifier, child) {
-                  bookMarkNotifier.loadJobs();
-                  return GestureDetector(
-                    onTap: () {},
-                    child: const Padding(
-                      padding: EdgeInsets.only(right: 12.0),
-                      child: Icon(Icons.edit_note_outlined),
-                    ),
-                  );
-                })
-              ],
               child: GestureDetector(
                 onTap: () => Get.back(),
                 child: const Icon(Icons.arrow_back_ios),
@@ -213,11 +200,11 @@ class _JobsDetailsViewPageState extends State<JobsDetailsViewPage> {
                           padding: EdgeInsets.only(bottom: 20.h),
                           child: CustomOutlineBtn(
                             onTap: () {
-                              Get.to(() => JobsApplyNowFormPage(
+                              Get.to(() => UpdateJobsPage(
                                     job: job,
                                   ));
                             },
-                            text: 'Edit Details',
+                            text: 'Update Details',
                             width: width,
                             height: height * 0.05,
                             primaryColor: Color(kLight.value),

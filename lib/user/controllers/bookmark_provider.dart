@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs_hub/user/models/request/bookmarks/bookmarks_internship_model.dart';
 import 'package:jobs_hub/user/models/request/bookmarks/bookmarks_model.dart';
 import 'package:jobs_hub/user/models/response/bookmarks/all_bookmarks.dart';
+import 'package:jobs_hub/user/models/response/bookmarks/internship_bookmarks.dart';
 import 'package:jobs_hub/user/services/helpers/bookmark_helper.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,7 +48,7 @@ class BookMarkNotifier extends ChangeNotifier {
   }
 
   addBookmark(BookmarkReqModel model, String jobId) {
-    BookMarkHelper.addBookmark(model: model).then((response) {
+    BookMarkHelper.addJobBookmark(model: model).then((response) {
       if (response[0]) {
         addJob(jobId);
         Get.snackbar(
@@ -96,6 +98,11 @@ class BookMarkNotifier extends ChangeNotifier {
     bookmarks = BookMarkHelper.getBookmarks();
   }
 
+  late Future<List<AllInternshipBookmarks>> internshipBookmarks;
+  getInternshipBookmarks() {
+    internshipBookmarks = BookMarkHelper.getInternsipBookmarks();
+  }
+
   //Internships BookMark
 
   List<String> _internships = [];
@@ -136,10 +143,10 @@ class BookMarkNotifier extends ChangeNotifier {
     }
   }
 
-  addInternshipBookmark(BookmarkReqModel model, String internshipId) {
+  addInternshipBookmark(BookmarkReqInternshipModel model, String internshipId) {
     BookMarkHelper.addInternshipBookmark(model: model).then((response) {
       if (response[0]) {
-        addJob(internshipId);
+        addInternship(internshipId);
         Get.snackbar(
           "Bookmark Added Successfully",
           "Please check your Bookmarks",
@@ -163,7 +170,7 @@ class BookMarkNotifier extends ChangeNotifier {
     BookMarkHelper.deleteInternshipBookmark(internshipId: internshipId)
         .then((response) {
       if (response) {
-        removeJob(internshipId);
+        removeInternship(internshipId);
         Get.snackbar(
           "Bookmark Removed Successfully",
           "Please check your Bookmarks",

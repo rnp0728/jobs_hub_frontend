@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const HeightSpacer(size: 50),
                 CustomTextField(
-                  hintText: 'Email Id',
+                  hintText: 'Email ID',
                   keyboardType: TextInputType.emailAddress,
                   controller: emailController,
                   validator: (email) {

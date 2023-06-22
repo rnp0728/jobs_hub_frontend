@@ -108,4 +108,25 @@ class JobsHelper {
       throw Exception('Failed to load the Jobs');
     }
   }
+
+  static Future<bool> deleteJobByAdmin({required String jobId}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': 'Bearer $token'
+    };
+
+    var url = Uri.https(Config.apiUrl, '${Config.jobs}/$jobId');
+    var response = await client.delete(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Failed to load the User Details');
+    }
+  }
 }

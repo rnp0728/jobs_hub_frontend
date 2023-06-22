@@ -23,7 +23,6 @@ import 'package:jobs_hub/user/controllers/signup_provider.dart';
 import 'package:jobs_hub/user/controllers/zoom_provider.dart';
 import 'package:jobs_hub/firebase_options.dart';
 import 'package:jobs_hub/user/views/ui/auth/login.dart';
-import 'package:jobs_hub/user/views/ui/common/safety_tips_page.dart';
 import 'package:jobs_hub/user/views/ui/mainscreen.dart';
 import 'package:jobs_hub/user/views/ui/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';

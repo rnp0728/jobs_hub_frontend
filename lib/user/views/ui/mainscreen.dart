@@ -6,7 +6,8 @@ import 'package:jobs_hub/user/views/common/drawer/drawer_screen.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:jobs_hub/user/views/ui/auth/profile.dart';
 import 'package:jobs_hub/user/views/ui/bookmarks/bookmarks.dart';
-import 'package:jobs_hub/user/views/ui/chat/chatpage.dart';
+import 'package:jobs_hub/user/views/ui/bookmarks/bookmarks_with_navigation_bar.dart';
+import 'package:jobs_hub/user/views/ui/common/recommanded_sites_to_visit_page.dart';
 import 'package:jobs_hub/user/views/ui/device_mgt/devices_info.dart';
 import 'package:jobs_hub/user/views/ui/homepage.dart';
 import 'package:jobs_hub/user/views/ui/internships/internship_list_page.dart';
@@ -50,11 +51,13 @@ class _MainScreenState extends State<MainScreen> {
       case 2:
         return const InternshipsListPage();
       case 3:
-        return const BookMarkPage();
+        return const BookMarkPageNew();
       case 4:
         return const DeviceManagement();
       case 5:
         return const ProfilePage();
+      case 6:
+        return const RecommandedSitesPage();
       default:
         return const Placeholder();
     }

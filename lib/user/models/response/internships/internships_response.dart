@@ -14,6 +14,7 @@ class InternshipsResponse {
     required this.description,
     required this.stipend,
     required this.period,
+    required this.duration,
     required this.contract,
     required this.requirements,
     required this.skillsRequired,
@@ -31,6 +32,7 @@ class InternshipsResponse {
   final String description;
   final String stipend;
   final String period;
+  final String duration;
   final String contract;
   final List<String> requirements;
   final List<String> skillsRequired;
@@ -48,6 +50,7 @@ class InternshipsResponse {
         hiring: json["hiring"],
         description: json["description"],
         stipend: json["stipend"],
+        duration: json["duration"],
         period: json["period"],
         contract: json["contract"],
         requirements: List<String>.from(json["requirements"].map((x) => x)),

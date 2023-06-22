@@ -44,7 +44,7 @@ class _BookMarkPageState extends State<BookMarkPage> {
                 final bookmarks = snapshot.data;
                 if (bookmarks?.isEmpty ?? true) {
                   return const Center(
-                    child: Text('No Jobs Available Right Now'),
+                    child: Text('No Bookmarks'),
                   );
                 }
                 return ListView.builder(

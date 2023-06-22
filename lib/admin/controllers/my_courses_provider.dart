@@ -6,9 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jobs_hub/admin/models/course_req.dart';
-import 'package:jobs_hub/admin/models/internship_req.dart';
 import 'package:jobs_hub/admin/services/posted_course_helper.dart';
-import 'package:jobs_hub/admin/services/posted_internships_helper.dart';
 import 'package:jobs_hub/admin/views/admin_home_page.dart';
 import 'package:jobs_hub/constants/app_constants.dart';
 import 'package:uuid/uuid.dart';
@@ -120,7 +118,6 @@ class MyCourseNotifier extends ChangeNotifier {
         .child('${uuid.v1()}jpg');
     await ref.putFile(image);
     imageUrl = await ref.getDownloadURL();
-    print(imageUrl);
     return imageUrl;
   }
 }

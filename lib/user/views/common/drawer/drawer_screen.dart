@@ -24,69 +24,78 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ZoomDrawer.of(context)!.toggle();
         },
         child: Scaffold(
-            backgroundColor: Color(kLightBlue.value),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                drawerItem(
-                  AntDesign.home,
-                  "Home",
-                  0,
-                  zoomNotifier.currentIndex == 0
-                      ? Color(kLight.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  Icons.work_outline_outlined,
-                  "Jobs",
-                  1,
-                  zoomNotifier.currentIndex == 1
-                      ? Color(kLight.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  Icons.rocket_launch_outlined,
-                  "Internships",
-                  2,
-                  zoomNotifier.currentIndex == 2
-                      ? Color(kLight.value)
-                      : Color(kLightGrey.value),
-                ),
-                // drawerItem(
-                //   Ionicons.chatbubble_outline,
-                //   "Chat",
-                //   3,
-                //   zoomNotifier.currentIndex == 3
-                //       ? Color(kLight.value)
-                //       : Color(kLightGrey.value),
-                // ),
-                drawerItem(
-                  Fontisto.bookmark,
-                  "Bookmarks",
-                  3,
-                  zoomNotifier.currentIndex == 4
-                      ? Color(kLight.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  MaterialCommunityIcons.devices,
-                  "Device Mgmt",
-                  4,
-                  zoomNotifier.currentIndex == 5
-                      ? Color(kLight.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  FontAwesome5Regular.user_circle,
-                  "Profile",
-                  5,
-                  zoomNotifier.currentIndex == 6
-                      ? Color(kLight.value)
-                      : Color(kLightGrey.value),
-                )
-              ],
-            )),
+          backgroundColor: Color(kLightBlue.value),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              drawerItem(
+                AntDesign.home,
+                "Home",
+                0,
+                zoomNotifier.currentIndex == 0
+                    ? Color(kLight.value)
+                    : Color(kLightGrey.value),
+              ),
+              drawerItem(
+                Icons.work_outline_outlined,
+                "Jobs",
+                1,
+                zoomNotifier.currentIndex == 1
+                    ? Color(kLight.value)
+                    : Color(kLightGrey.value),
+              ),
+              drawerItem(
+                Icons.rocket_launch_outlined,
+                "Internships",
+                2,
+                zoomNotifier.currentIndex == 2
+                    ? Color(kLight.value)
+                    : Color(kLightGrey.value),
+              ),
+              // drawerItem(
+              //   Ionicons.chatbubble_outline,
+              //   "Chat",
+              //   3,
+              //   zoomNotifier.currentIndex == 3
+              //       ? Color(kLight.value)
+              //       : Color(kLightGrey.value),
+              // ),
+              drawerItem(
+                Fontisto.bookmark,
+                "Bookmarks",
+                3,
+                zoomNotifier.currentIndex == 3
+                    ? Color(kLight.value)
+                    : Color(kLightGrey.value),
+              ),
+              drawerItem(
+                MaterialCommunityIcons.devices,
+                "Device Mgmt",
+                4,
+                zoomNotifier.currentIndex == 4
+                    ? Color(kLight.value)
+                    : Color(kLightGrey.value),
+              ),
+              drawerItem(
+                FontAwesome5Regular.user_circle,
+                "Profile",
+                5,
+                zoomNotifier.currentIndex == 5
+                    ? Color(kLight.value)
+                    : Color(kLightGrey.value),
+              ),
+              drawerItem(
+                Icons.label_important_outline,
+                "Websites",
+                6,
+                zoomNotifier.currentIndex == 6
+                    ? Color(kLight.value)
+                    : Color(kLightGrey.value),
+              )
+            ],
+          ),
+        ),
       );
     });
   }

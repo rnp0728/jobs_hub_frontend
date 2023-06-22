@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jobs_hub/admin/controllers/my_jobs_provider.dart';
 import 'package:jobs_hub/admin/models/job_req.dart';
-import 'package:jobs_hub/user/controllers/profile_provider.dart';
 import 'package:jobs_hub/user/views/common/app_bar.dart';
 import 'package:jobs_hub/user/views/common/custom_btn.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';

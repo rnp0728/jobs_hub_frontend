@@ -10,13 +10,16 @@ import 'package:jobs_hub/user/views/ui/jobs/job_page.dart';
 
 class CustomTile extends StatelessWidget {
   final void Function()? onTap;
+  final void Function()? onLongPress;
   final JobsResponse job;
-  const CustomTile({super.key, this.onTap, required this.job});
+  const CustomTile(
+      {super.key, this.onTap, required this.job, this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+      onLongPress: onLongPress,
       child: Container(
         decoration: BoxDecoration(
             color: Color(kLightGrey.value),
@@ -33,8 +36,8 @@ class CustomTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/Facebook.png'),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(job.imageUrl),
                     ),
                     const WidthSpacer(width: 12),
                     ReusableText(

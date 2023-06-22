@@ -28,4 +28,25 @@ class PostedJobsHelper {
       return false;
     }
   }
+
+  static Future<bool> updateAJob(JobsReqModel model) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': 'Bearer $token'
+    };
+    var url = Uri.https(Config.apiUrl, Config.jobs);
+    var response = await client.put(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

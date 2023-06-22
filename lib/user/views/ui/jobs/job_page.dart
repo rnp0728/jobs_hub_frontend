@@ -92,9 +92,8 @@ class _JobPageState extends State<JobPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage("assets/images/user.png"),
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(job.imageUrl),
                                 ),
                                 const HeightSpacer(size: 10),
                                 ReusableText(
@@ -203,13 +202,13 @@ class _JobPageState extends State<JobPage> {
                               spacing: 10,
                               children: [
                                 for (int i = 0;
-                                    i < job.requirements.length;
+                                    i < job.skillsRequired.length;
                                     i++)
                                   Chip(
                                     side: BorderSide(
                                         color: Color(kOrange.value), width: 1),
-                                    label:
-                                        Text("$bullet ${job.requirements[i]}"),
+                                    label: Text(
+                                        "$bullet ${job.skillsRequired[i]}"),
                                   )
                               ],
                             ),

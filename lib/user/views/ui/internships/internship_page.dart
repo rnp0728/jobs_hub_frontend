@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jobs_hub/user/controllers/exports.dart';
 import 'package:jobs_hub/user/controllers/internships_provider.dart';
+import 'package:jobs_hub/user/models/request/bookmarks/bookmarks_internship_model.dart';
 import 'package:jobs_hub/user/models/request/bookmarks/bookmarks_model.dart';
 import 'package:jobs_hub/user/views/common/app_bar.dart';
 import 'package:jobs_hub/user/views/common/custom_outline_btn.dart';
@@ -36,21 +37,21 @@ class _InternshipPageState extends State<InternshipPage> {
               actions: [
                 Consumer<BookMarkNotifier>(
                     builder: (context, bookMarkNotifier, child) {
-                  bookMarkNotifier.loadJobs();
+                  bookMarkNotifier.loadInternships();
                   return GestureDetector(
                     onTap: () {
-                      if (bookMarkNotifier.jobs.contains(widget.id)) {
+                      if (bookMarkNotifier.internships.contains(widget.id)) {
                         bookMarkNotifier.deleteInternshipBookmark(widget.id);
                       } else {
-                        BookmarkReqModel model =
-                            BookmarkReqModel(job: widget.id);
+                        BookmarkReqInternshipModel model =
+                            BookmarkReqInternshipModel(internship: widget.id);
                         bookMarkNotifier.addInternshipBookmark(
                             model, widget.id);
                       }
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 12.0),
-                      child: bookMarkNotifier.jobs.contains(widget.id)
+                      child: bookMarkNotifier.internships.contains(widget.id)
                           ? const Icon(Icons.bookmark_added_rounded)
                           : const Icon(Icons.bookmark_add_outlined),
                     ),
@@ -96,9 +97,9 @@ class _InternshipPageState extends State<InternshipPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const CircleAvatar(
+                                CircleAvatar(
                                   backgroundImage:
-                                      AssetImage("assets/images/user.png"),
+                                      NetworkImage(internship.imageUrl),
                                 ),
                                 const HeightSpacer(size: 10),
                                 ReusableText(
@@ -111,6 +112,26 @@ class _InternshipPageState extends State<InternshipPage> {
                                   text: internship.location,
                                   style: appstyle(16, Color(kDarkGrey.value),
                                       FontWeight.normal),
+                                ),
+                                const HeightSpacer(size: 5),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ReusableText(
+                                      text: 'Duration - ',
+                                      style: appstyle(
+                                          16,
+                                          Color(kDarkGrey.value),
+                                          FontWeight.w600),
+                                    ),
+                                    ReusableText(
+                                      text: internship.duration,
+                                      style: appstyle(
+                                          16,
+                                          Color(kDarkGrey.value),
+                                          FontWeight.w600),
+                                    ),
+                                  ],
                                 ),
                                 const HeightSpacer(size: 15),
                                 Padding(
@@ -136,21 +157,18 @@ class _InternshipPageState extends State<InternshipPage> {
                                                 Color(kDark.value),
                                                 FontWeight.w600),
                                           ),
-                                          SizedBox(
-                                            width: width * 0.1,
-                                            child: ReusableText(
-                                              text: internship.period,
-                                              style: appstyle(
-                                                  18,
-                                                  Color(kDark.value),
-                                                  FontWeight.w600),
-                                            ),
+                                          ReusableText(
+                                            text: internship.period,
+                                            style: appstyle(
+                                                18,
+                                                Color(kDark.value),
+                                                FontWeight.w600),
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),

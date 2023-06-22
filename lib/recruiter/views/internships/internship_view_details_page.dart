@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:jobs_hub/admin/views/internships/update_internship_page.dart';
 import 'package:jobs_hub/user/controllers/exports.dart';
 import 'package:jobs_hub/user/controllers/internships_provider.dart';
-import 'package:jobs_hub/user/models/request/bookmarks/bookmarks_model.dart';
+import 'package:jobs_hub/user/models/request/bookmarks/bookmarks_internship_model.dart';
 import 'package:jobs_hub/user/views/common/app_bar.dart';
 import 'package:jobs_hub/user/views/common/custom_outline_btn.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:jobs_hub/user/views/common/height_spacer.dart';
-import 'package:jobs_hub/user/views/ui/apply_now/internship_apply_now_form_page.dart';
 import 'package:provider/provider.dart';
 
 class InternshipDetailsViewPage extends StatefulWidget {
@@ -37,21 +37,21 @@ class _InternshipDetailsViewPageState extends State<InternshipDetailsViewPage> {
               actions: [
                 Consumer<BookMarkNotifier>(
                     builder: (context, bookMarkNotifier, child) {
-                  bookMarkNotifier.loadJobs();
+                  bookMarkNotifier.loadInternships();
                   return GestureDetector(
                     onTap: () {
-                      if (bookMarkNotifier.jobs.contains(widget.id)) {
+                      if (bookMarkNotifier.internships.contains(widget.id)) {
                         bookMarkNotifier.deleteInternshipBookmark(widget.id);
                       } else {
-                        BookmarkReqModel model =
-                            BookmarkReqModel(job: widget.id);
+                        BookmarkReqInternshipModel model =
+                            BookmarkReqInternshipModel(internship: widget.id);
                         bookMarkNotifier.addInternshipBookmark(
                             model, widget.id);
                       }
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 12.0),
-                      child: bookMarkNotifier.jobs.contains(widget.id)
+                      child: bookMarkNotifier.internships.contains(widget.id)
                           ? const Icon(Icons.bookmark_added_rounded)
                           : const Icon(Icons.bookmark_add_outlined),
                     ),
@@ -227,11 +227,11 @@ class _InternshipDetailsViewPageState extends State<InternshipDetailsViewPage> {
                           padding: EdgeInsets.only(bottom: 20.h),
                           child: CustomOutlineBtn(
                             onTap: () {
-                              Get.to(() => InternshipsApplyNowFormPage(
+                              Get.to(() => UpdateInternshipPage(
                                     internship: internship,
                                   ));
                             },
-                            text: 'Apply Now',
+                            text: 'Update Details',
                             width: width,
                             height: height * 0.06,
                             primaryColor: Color(kLight.value),

@@ -27,4 +27,8 @@ class JobsNotifier extends ChangeNotifier {
   getJobsAddedByAgent() {
     agentJobsList = JobsHelper.getJobsAddedByAgent();
   }
+
+  Future<bool> deleteJobByAdmin({required String jobId}) {
+    return JobsHelper.deleteJobByAdmin(jobId: jobId);
+  }
 }

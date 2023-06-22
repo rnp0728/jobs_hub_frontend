@@ -323,9 +323,14 @@ class PostedInternshipsWidget extends StatelessWidget {
   }
 }
 
-class PostedJobsWidget extends StatelessWidget {
+class PostedJobsWidget extends StatefulWidget {
   const PostedJobsWidget({super.key});
 
+  @override
+  State<PostedJobsWidget> createState() => _PostedJobsWidgetState();
+}
+
+class _PostedJobsWidgetState extends State<PostedJobsWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<JobsNotifier>(builder: (context, jobsNotifier, child) {
@@ -380,6 +385,43 @@ class PostedJobsWidget extends StatelessWidget {
                                   id: job.id,
                                   title: job.company,
                                 ),
+                              );
+                            },
+                            onLongPress: (){
+                              QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.warning,
+                                text:
+                                'Do you want remove ${job.title} from Jobs Hub?',
+                                confirmBtnText: 'Yes',
+                                cancelBtnText: 'No',
+                                onConfirmBtnTap: () async {
+                                  var response = await jobsNotifier
+                                      .deleteJobByAdmin(jobId: job.id);
+                                  Get.back();
+                                  if (response) {
+                                    Get.snackbar(
+                                      'Job Removed',
+                                      'Job Removed Successfully',
+                                      colorText: Color(kLight.value),
+                                      backgroundColor: Color(kDarkBlue.value),
+                                      icon: const Icon(Icons.done),
+                                    );
+                                  } else {
+                                    Get.snackbar(
+                                      'Error Occurred',
+                                      'Please Try Again Later!',
+                                      colorText: Color(kLight.value),
+                                      backgroundColor: Color(kDarkBlue.value),
+                                      icon: const Icon(Icons.done),
+                                    );
+                                  }
+
+                                  setState(() {});
+                                },
+                                showCancelBtn: true,
+                                onCancelBtnTap: () => Get.back(),
+                                confirmBtnColor: Colors.green,
                               );
                             },
                             job: job,

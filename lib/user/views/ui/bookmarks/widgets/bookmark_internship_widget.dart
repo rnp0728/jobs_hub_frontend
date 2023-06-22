@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
-import 'package:jobs_hub/user/models/response/bookmarks/all_bookmarks.dart';
+import 'package:jobs_hub/user/models/response/bookmarks/internship_bookmarks.dart';
 import 'package:jobs_hub/user/views/common/exports.dart';
 import 'package:jobs_hub/user/views/common/width_spacer.dart';
+import 'package:jobs_hub/user/views/ui/internships/internship_page.dart';
 import 'package:jobs_hub/user/views/ui/jobs/job_page.dart';
 
-class BookmarkTileWidget extends StatelessWidget {
-  final AllBookmarks bookmark;
-  const BookmarkTileWidget({super.key, required this.bookmark});
+class BookmarkTile2Widget extends StatelessWidget {
+  final AllInternshipBookmarks bookmark;
+  const BookmarkTile2Widget({super.key, required this.bookmark});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class BookmarkTileWidget extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 12.h, right: 10, left: 10),
       child: GestureDetector(
         onTap: () {
-          Get.to(
-              () => JobPage(title: bookmark.job!.title, id: bookmark.job!.id));
+          Get.to(() => JobPage(
+              title: bookmark.internship!.title, id: bookmark.internship!.id));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -39,7 +40,8 @@ class BookmarkTileWidget extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(bookmark.job!.imageUrl),
+                        backgroundImage:
+                            NetworkImage(bookmark.internship!.imageUrl),
                       ),
                       const WidthSpacer(width: 10),
                       Column(
@@ -47,14 +49,14 @@ class BookmarkTileWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ReusableText(
-                            text: bookmark.job!.company,
+                            text: bookmark.internship!.company,
                             style: appstyle(
                                 20, Color(kDark.value), FontWeight.w600),
                           ),
                           SizedBox(
                             width: width * 0.5,
                             child: ReusableText(
-                              text: bookmark.job!.title,
+                              text: bookmark.internship!.title,
                               style: appstyle(
                                   18, Color(kDarkGrey.value), FontWeight.w600),
                             ),
@@ -65,8 +67,9 @@ class BookmarkTileWidget extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => JobPage(
-                          title: bookmark.job!.title, id: bookmark.job!.id));
+                      Get.to(() => InternshipPage(
+                          title: bookmark.internship!.title,
+                          id: bookmark.internship!.id));
                     },
                     child: CircleAvatar(
                       radius: 18,
@@ -83,12 +86,12 @@ class BookmarkTileWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       ReusableText(
-                        text: bookmark.job!.salary,
+                        text: bookmark.internship!.stipend,
                         style:
                             appstyle(18, Color(kDark.value), FontWeight.w600),
                       ),
                       ReusableText(
-                        text: '/${bookmark.job!.period}',
+                        text: '/${bookmark.internship!.period}',
                         style: appstyle(
                             16, Color(kDarkGrey.value), FontWeight.w600),
                       ),

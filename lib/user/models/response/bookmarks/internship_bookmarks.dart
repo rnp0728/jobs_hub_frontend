@@ -1,55 +1,60 @@
 import 'dart:convert';
 
-List<AllBookmarks> allBookmarksFromJson(String str) => List<AllBookmarks>.from(
-    json.decode(str).map((x) => AllBookmarks.fromJson(x)));
+List<AllInternshipBookmarks> allInternshipBookmarksFromJson(String str) =>
+    List<AllInternshipBookmarks>.from(
+        json.decode(str).map((x) => AllInternshipBookmarks.fromJson(x)));
 
-class AllBookmarks {
+class AllInternshipBookmarks {
   final String id;
-  final Job? job;
+  final Internship? internship;
   final String userId;
 
-  AllBookmarks({
+  AllInternshipBookmarks({
     required this.id,
-    this.job,
+    this.internship,
     required this.userId,
   });
 
-  factory AllBookmarks.fromJson(Map<String, dynamic> json) => AllBookmarks(
-        id: json["_id"],
-        job: json["job"] != null ? Job.fromJson(json["job"]) : null,
-        userId: json["userId"],
-      );
+  factory AllInternshipBookmarks.fromJson(Map<String, dynamic> json) {
+    return AllInternshipBookmarks(
+      id: json["_id"],
+      internship: json["internship"] != null
+          ? Internship.fromJson(json["internship"])
+          : null,
+      userId: json["userId"],
+    );
+  }
 }
 
-class Job {
+class Internship {
   final String id;
   final String title;
   final String location;
   final String company;
-  final String salary;
+  final String stipend;
   final String period;
   final String contract;
   final String imageUrl;
   final String agentId;
 
-  Job({
+  Internship({
     required this.id,
     required this.title,
     required this.location,
     required this.company,
-    required this.salary,
+    required this.stipend,
     required this.period,
     required this.contract,
     required this.imageUrl,
     required this.agentId,
   });
 
-  factory Job.fromJson(Map<String, dynamic> json) => Job(
+  factory Internship.fromJson(Map<String, dynamic> json) => Internship(
         id: json["_id"],
         title: json["title"],
         location: json["location"],
         company: json["company"],
-        salary: json["salary"],
+        stipend: json["stipend"],
         period: json["period"],
         contract: json["contract"],
         imageUrl: json["imageUrl"],
