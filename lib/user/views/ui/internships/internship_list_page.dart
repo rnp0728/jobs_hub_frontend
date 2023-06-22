@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:jobs_hub/admin/views/internships/internships_search_page.dart';
 import 'package:jobs_hub/user/controllers/exports.dart';
 import 'package:jobs_hub/user/controllers/internships_provider.dart';
 import 'package:jobs_hub/user/views/common/app_bar.dart';
@@ -47,7 +48,7 @@ class InternshipsListPage extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.w),
                   child: InternshipSearchWidget(
                     onTap: () {
-                      Get.to(() => const SearchPage());
+                      Get.to(() => const InternshipsSearchPage());
                     },
                   ),
                 ),

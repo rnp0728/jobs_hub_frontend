@@ -20,7 +20,7 @@ class VerticalTile extends StatelessWidget {
             color: Color(kLightGrey.value),
             borderRadius: BorderRadius.circular(20)),
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        height: height * 0.15,
+        height: height * 0.16,
         width: width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

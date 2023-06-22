@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:jobs_hub/admin/views/internships/internships_search_page.dart';
 import 'package:jobs_hub/admin/widgets/course_tile.dart';
 import 'package:jobs_hub/constants/app_constants.dart';
 import 'package:jobs_hub/launch_urls.dart';
@@ -307,7 +308,7 @@ class InternshipsWidget extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.w),
                   child: InternshipSearchWidget(
                     onTap: () {
-                      Get.to(() => const SearchPage());
+                      Get.to(() => const InternshipsSearchPage());
                     },
                   ),
                 ),
